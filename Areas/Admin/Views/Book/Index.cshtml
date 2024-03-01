@@ -34,7 +34,7 @@
                 <!--                                            'categoryId='+(categoryId!=null?categoryId:'')+'&orderBy='+(orderBy!=null&&orderBy!=''?orderBy:'')+'&keyword'-->
                 @* <input if="${categoryId!=null}" type="hidden" name="categoryId" value=""> *@
                 <input type="text" name="SearchString" class="form-control pull-right" placeholder="Search" value="@ViewBag.currentFilter">
-                @* <input if="${orderBy!=null&&orderBy!=''}" type="hidden" name="orderBy" value="${orderBy}"> *@
+                <input type="hidden" name="CategoryId" value="@ViewBag.categoryId">
                 <div class="input-group-btn">
                   <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                 </div>
@@ -83,7 +83,7 @@
         </div> *@
 
         @Html.PagedListPager(Model, page => Url.Action("Index", 
-        new {currentFilter = ViewBag.currentFilter, searchString = ViewBag.searchString, page}), 
+        new {currentFilter = ViewBag.currentFilter, CategoryId = ViewBag.categoryId, page}), 
         new X.PagedList.Web.Common.PagedListRenderOptions(){
             LiElementClasses = new List<String> {"page-item"},
             PageClasses = new List<String> {"page-link"}

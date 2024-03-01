@@ -20,16 +20,19 @@ public class BookController : Controller
     }
 
     [Route("list-books")]
-    public async Task<IActionResult> Index(string? searchString, string? currentFilter, int? page) {
+    public async Task<IActionResult> Index(string? searchString, string? currentFilter, int? CategoryId, int? page) {
         if(searchString != null) {
             page = 1;
         } else {
             searchString = currentFilter;
         }
         ViewBag.currentFilter = searchString;
+        ViewBag.categoryId = CategoryId;
 
         var books = from b in _dbContext.Books.Include(b => b.Category) select b;
-        var categorys = _dbContext.Categories;
+        if(CategoryId != null) {
+            books = from b in books where b.CategoryId == CategoryId select b;
+        }
         if(!String.IsNullOrEmpty(searchString)) {
             books = books.Where(b => b.BookName.Contains(searchString)); // lấy thêm cả property Category cho book
         }

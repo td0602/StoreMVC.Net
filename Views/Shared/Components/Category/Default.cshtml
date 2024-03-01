@@ -8,7 +8,7 @@
     </a>
     <ul class="treeview-menu" style="display: none;">
         @foreach(var item in Model) {
-            <li><a href="#">@item.CategoryName</a></li>
+            <li><a asp-area="Admin" asp-controller="Book" asp-action="Index" asp-route-CategoryId="@item.CategoryId">@item.CategoryName</a></li>
         }
     </ul>
 </li>
