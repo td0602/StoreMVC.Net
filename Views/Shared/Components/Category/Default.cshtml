@@ -1,0 +1,14 @@
+@using Store_App.Models
+@model List<Category>
+<li class="treeview">
+    <a><i class="glyphicon glyphicon-filter"></i> Thể loại
+        <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+        </span>
+    </a>
+    <ul class="treeview-menu" style="display: none;">
+        @foreach(var item in Model) {
+            <li><a href="#">@item.CategoryName</a></li>
+        }
+    </ul>
+</li>

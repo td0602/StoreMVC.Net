@@ -224,17 +224,7 @@
                         </a>
                         <ul class="treeview-menu" style="display: none;">
                             <li><a asp-area="Admin" asp-controller="Book" asp-action="Index"><i class="glyphicon glyphicon-th-large"></i> Tất cả</a></li>
-                            <li class="treeview">
-                                <a><i class="glyphicon glyphicon-filter"></i> Thể loại
-                                    <span class="pull-right-container">
-                                        <i class="fa fa-angle-left pull-right"></i>
-                                    </span>
-                                </a>
-                                <ul class="treeview-menu" style="display: none;">
-                                    <li><a href="#">Truyện thiếu nhi</i></a></li>
-                                    <li><a href="#">Truyện thiếu nhi</i></a></li>
-                                </ul>
-                            </li>
+                            @await Component.InvokeAsync("Category")
                         </ul>
                     <li><a asp-area="Admin" asp-controller="Book" asp-action="Create"><i class="glyphicon glyphicon-plus"></i>Thêm mới</a></li>
             </li>
