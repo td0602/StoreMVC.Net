@@ -1,0 +1,96 @@
+@using X.PagedList.Mvc.Core
+@model X.PagedList.IPagedList<Book>
+
+<!-- Content Header (Page header) -->
+    <section class="content-header">
+
+        @if(TempData["SuccessMessage"] != null){
+            <div id="myAlert" class="alert alert-success" role="alert">
+            @TempData["SuccessMessage"]
+            </div>
+        }
+        @if(@TempData["ErrorMessage"] != null) {
+            <div id="myAlert" class="alert alert-danger" role="alert">
+            @TempData["ErrorMessage"]
+            </div>
+        }
+
+      <h1>
+        Danh sách sản phẩm
+      </h1>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      <div class="box">
+        <div class="box-body">
+
+          @* <form action="#" method="get"> *@
+            @using (Html.BeginForm("Index", "Book", FormMethod.Get)) {
+              <div class="box-tools pull-right margin-bottom">
+              <div class="input-group input-group-sm hidden-xs" style="width: 200px;">
+                <!--                                            'categoryId='+(categoryId!=null?categoryId:'')+'&orderBy='+(orderBy!=null&&orderBy!=''?orderBy:'')+'&keyword'-->
+                @* <input if="${categoryId!=null}" type="hidden" name="categoryId" value=""> *@
+                <input type="text" name="SearchString" class="form-control pull-right" placeholder="Search" value="@ViewBag.currentFilter">
+                @* <input if="${orderBy!=null&&orderBy!=''}" type="hidden" name="orderBy" value="${orderBy}"> *@
+                <div class="input-group-btn">
+                  <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                </div>
+              </div>
+            </div>
+            }
+          @* </form> *@
+
+          <table class="table table-bordered">
+              <tbody><tr>
+                <th>ID</th>
+                <th>Book Name</th>
+                <th>Price</th>
+                <th>Image</th>
+                <th>Category</th>
+                <th>Action</th>
+              </tr>
+              @foreach(var item in Model) {
+                <tr>
+                <td>@item.BookId</td>
+                <td>@item.BookName</td>
+                <td>@item.Price</td>
+                <td><img src="@Url.Content("~/uploads/BookImages/" + item.Image)" width="100" height="150"/></td>
+                <td>@item.Category.CategoryName</td>
+                <td>
+                  <a asp-action="Edit" asp-route-BookId="@item.BookId" class="btn btn-success">Edit</a>
+                  <a class="btn btn-danger" onclick="return confirm('Bạn chắc chắn?')" asp-action="Delete" asp-route-BookId="@item.BookId">Delete</a>
+                </td>
+              </tr>
+              }
+
+              </tbody></table>
+
+        </div>
+
+        @* <div class="box-footer clearfix">
+          <ul class="pagination pagination-sm no-margin pull-right">
+            <li if="${currentPage>1}">
+              <a href="#">«</a>
+            </li>
+            <li><a href="#"></a></li>
+            <li>
+              <a href="#">»</a>
+            </li>
+          </ul>
+        </div> *@
+
+        @Html.PagedListPager(Model, page => Url.Action("Index", 
+        new {currentFilter = ViewBag.currentFilter, searchString = ViewBag.searchString, page}), 
+        new X.PagedList.Web.Common.PagedListRenderOptions(){
+            LiElementClasses = new List<String> {"page-item"},
+            PageClasses = new List<String> {"page-link"}
+            })
+        
+      </div>
+      <!-- /.box -->
+
+    </section>
+    <!-- /.content -->

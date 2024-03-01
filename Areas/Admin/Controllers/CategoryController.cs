@@ -5,7 +5,7 @@ using X.PagedList;
 
 namespace StoreApp.Areas.Admin.Controllers;
 [Area("Admin")]
-[Route("admin/[controller]")]
+[Route("admin/category")]
 public class CategoryController : Controller
 {
     private readonly AppDbContext _dbContext;

@@ -5,7 +5,7 @@ using Store_App.Models;
 namespace Store_App.Areas.Admin.Controllers;
 
 [Area("Admin")]
-[Route("admin/[action]")]
+[Route("admin")]
 public class AdminHomeController : Controller
 {
     private readonly AppDbContext _dbContext;
@@ -13,6 +13,7 @@ public class AdminHomeController : Controller
         _dbContext = dbContext;
     }
 
+    [Route("home")]
     public IActionResult Index() {
         return View();
     }

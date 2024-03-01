@@ -18,10 +18,6 @@ namespace Store_App.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);    
-
-            modelBuilder.Entity<Category>()
-                .Property(entity => entity.CategoryId)
-                .ValueGeneratedOnAdd();
         }
 
         public DbSet<Book> Books { get; set; }

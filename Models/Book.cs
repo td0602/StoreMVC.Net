@@ -8,6 +8,7 @@ namespace Store_App.Models
     public class Book
     {
         [Key]
+        [ScaffoldColumn(false)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int BookId {set; get;}
         [Required(ErrorMessage ="Không được để trống!")]
@@ -25,10 +26,10 @@ namespace Store_App.Models
         public string Description {get; set;}
         public string? Image {get; set;}
 
-        public List<Cart> Carts {set; get;}
+        public List<Cart>? Carts {set; get;}
 
         public int CategoryId {set; get;}
         [ForeignKey("CategoryId")]
-        public Category category {set; get;}
+        public Category? Category {set; get;}
     }
 }

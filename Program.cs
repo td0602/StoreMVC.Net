@@ -1,5 +1,6 @@
 using Store_App.Models;
 using Microsoft.EntityFrameworkCore;
+using Store_App.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +10,11 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options => {
     string connectString = builder.Configuration.GetConnectionString("AppConnectionString");
     options.UseSqlServer(connectString);
+    // Tắt log SQL
+    options.EnableSensitiveDataLogging(false);
 });
+
+builder.Services.AddScoped<FileUploadService>();
 
 var app = builder.Build();
 

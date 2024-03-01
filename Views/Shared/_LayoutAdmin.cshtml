@@ -22,11 +22,11 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="../../index2.html" class="logo">
+    <a asp-area="Admin" asp-controller="AdminHome" asp-action="Index" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
+      <span class="logo-mini"><b>B</b>S</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg">BACKHOA_APTECH</span>
+      <span class="logo-lg">BOOKSTORE</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -223,7 +223,7 @@
                             </span>
                         </a>
                         <ul class="treeview-menu" style="display: none;">
-                            <li><a href="/admin/books"><i class="glyphicon glyphicon-th-large"></i> Tất cả</a></li>
+                            <li><a asp-area="Admin" asp-controller="Book" asp-action="Index"><i class="glyphicon glyphicon-th-large"></i> Tất cả</a></li>
                             <li class="treeview">
                                 <a><i class="glyphicon glyphicon-filter"></i> Thể loại
                                     <span class="pull-right-container">
@@ -236,7 +236,7 @@
                                 </ul>
                             </li>
                         </ul>
-                    <li><a href="#"><i class="glyphicon glyphicon-plus"></i>Thêm mới</a></li>
+                    <li><a asp-area="Admin" asp-controller="Book" asp-action="Create"><i class="glyphicon glyphicon-plus"></i>Thêm mới</a></li>
             </li>
           </ul>
           <li>
@@ -301,5 +301,15 @@
 <script src="/admin/assets/tinymce/tinymce.min.js"></script>
 <script src="/admin/assets/tinymce/config.js"></script>
 <script src="/admin/assets/js/function.js"></script>
+    <!--CKEditer-->
+  <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
+  <!--CKEditor-->
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#content' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
 </body>
 </html>
