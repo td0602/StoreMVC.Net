@@ -1,0 +1,30 @@
+
+
+        @model Store_App.Models.Category;
+        <section class="content-header">
+            <h1>
+                Thêm mới danh mục
+            </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+
+                <div class="box box-primary">
+                    <form role="form" method="post" asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label asp-for="CategoryName" class="control-label"></label>
+                                <input asp-for="CategoryName" class="form-control" />
+                                <span asp-validation-for="CategoryName" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+        </section>
