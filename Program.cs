@@ -15,6 +15,8 @@ builder.Services.AddDbContext<AppDbContext>(options => {
 });
 
 builder.Services.AddScoped<FileUploadService>();
+// đăng ký dịch vụ Session phục vụ login logout
+builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -32,6 +34,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

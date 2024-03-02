@@ -1,0 +1,5 @@
+@model List<Category>
+
+        @foreach(var item in Model) {
+            <li><a asp-controller="Home" asp-action="GridShop" asp-route-CategoryId = "@item.CategoryId">@item.CategoryName</a></li>
+        }

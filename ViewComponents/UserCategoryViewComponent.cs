@@ -4,10 +4,10 @@ using Store_App.Models;
 
 namespace Store_App.ViewComponents;
 
-public class CategoryViewComponent : ViewComponent
+public class UserCategoryViewComponent : ViewComponent
 {
     private readonly AppDbContext _dbContext;
-    public CategoryViewComponent(AppDbContext dbContext) {
+    public UserCategoryViewComponent(AppDbContext dbContext) {
         _dbContext = dbContext;
     }
 
