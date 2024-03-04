@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Store_App.Models.CustomIdentity;
 
 namespace Store_App.Models;
 
@@ -23,9 +24,9 @@ public class Cart
     public decimal Total {set; get;}
     public bool Status {set; get;}
 
-    public int UerId {set; get;}
-    [ForeignKey("UserId")]
-    public User user {set; get;}
+    public int AppUserId {set; get;}
+    [ForeignKey("AppUserId")]
+    public AppUser appUser {set; get;}
 
     public int BookId {set; get;}
     [ForeignKey("BookId")]
