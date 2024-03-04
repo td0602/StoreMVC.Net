@@ -43,7 +43,7 @@ public class HomeController : Controller
             SearchString = CurrentFilter;
         }
         ViewBag.categoryId = CategoryId;
-        ViewBag.currentSearch = SearchString;
+        ViewBag.currentFilter = SearchString;
         ViewBag.orderString = OrderString;
 
         var books = from b in _dbContext.Books.Include(b => b.Category) select b;

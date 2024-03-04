@@ -47,10 +47,20 @@
                                 
                                 <div class="orderby__wrapper">
                                     <span>Sort By</span>
-                                    <select id="sortDropdown" class="shot__byselect">
-                                        <option  class="title"></option>
-                                        <option value="ASC">Increasing Price</option>
-                                        <option value="DESC">Decreasing Price</option>
+                                    <select id="sortDropdown" class="shot__byselect" name="OrderString">
+                                        @if(ViewBag.orderString==null) {
+                                            <option  class="title">Choose option</option>
+                                            <option value="ASC">Increasing Price</option>
+                                            <option value="DESC">Decreasing Price</option>
+                                        } else if(ViewBag.orderString=="ASC"){
+                                            <option  class="title">Choose option</option>
+                                            <option value="ASC" selected>Increasing Price</option>
+                                            <option value="DESC">Decreasing Price</option>
+                                        }else if(ViewBag.orderString=="DESC"){
+                                            <option  class="title">Choose option</option>
+                                            <option value="ASC">Increasing Price</option>
+                                            <option value="DESC" selected>Decreasing Price</option>
+                                        }
                                     </select>
                                 </div>
                                 <!--Searrch-->
@@ -59,10 +69,9 @@
                                     {
                                         <div class="box-tools pull-right margin-bottom">
                                             <div class="input-group input-group-sm hidden-xs" style="width: 200px;">
-                                                <!--                                            'categoryId='+(categoryId!=null?categoryId:'')+'&orderBy='+(orderBy!=null&&orderBy!=''?orderBy:'')+'&keyword'-->
                                                 <input type="hidden" name="CategoryId" value="@ViewBag.categoryId">
-                                                <input type="text" name="SearchString" class="form-control pull-right" placeholder="Search" value="@ViewBag.currentSearch">
-                                                <input  type="hidden" name="OrderString" value="@ViewBag.orderString">
+                                                <input type="text" name="SearchString" class="form-control pull-right" placeholder="Search" value="@ViewBag.currentFilter">
+                                                <input type="hidden" name="OrderString" id="orderStringHidden">
                                                 <div class="input-group-btn">
                                                     <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                                                 </div>
@@ -131,7 +140,8 @@
                             @* <ul class="wn__pagination">
                             </ul> *@
                             @Html.PagedListPager(Model, page => Url.Action("GridShop", 
-                            new {CurrentFilter = ViewBag.currentFilter, CategoryId = ViewBag.categoryId, page, OrderString = ViewBag.orderString}), 
+                            new {CurrentFilter = ViewBag.currentFilter, CategoryId = ViewBag.categoryId, page, 
+                                OrderString = ViewBag.orderString}), 
                             new X.PagedList.Web.Common.PagedListRenderOptions(){
                                 LiElementClasses = new List<String> {"page-item"},
                                 PageClasses = new List<String> {"page-link"}
@@ -143,3 +153,9 @@
             </div>
         </div>
     </div>
+
+    <script>
+    document.getElementById('sortDropdown').addEventListener('change', function () {
+        document.getElementById('orderStringHidden').value = this.value;
+    });
+    </script>
