@@ -26,12 +26,15 @@ public class UserAuthenticationController : Controller
         TempData["msg"] = result.Message;
         return RedirectToAction(nameof(Registration));
     }
+
+    [Route("/login")]
     public IActionResult Login()
     {
         return View();
     }
 
     [HttpPost]
+    [Route("/login")]
     public async Task<IActionResult> Login (LoginModel model) {
         if(!ModelState.IsValid) {
             return View(model);

@@ -5,7 +5,17 @@
     Layout = "~/Views/Shared/_LayoutBookStore.cshtml";
 }
    
-   
+   @if(TempData["SuccessMessage"] != null){
+    <div id="myAlert" class="alert alert-success" role="alert">
+    @TempData["SuccessMessage"]
+    </div>
+}
+@if(@TempData["ErrorMessage"] != null) {
+    <div id="myAlert" class="alert alert-danger" role="alert">
+    @TempData["ErrorMessage"]
+    </div>
+}
+
     <div class="ht__breadcrumb__area bg-image--1">
         <div class="container">
             <div class="row">

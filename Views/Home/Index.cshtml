@@ -1,21 +1,13 @@
 ﻿@using Store_App.Models
 @model List<Book>
+
 @{
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_LayoutBookStore.cshtml";
     List<Book> booksDescId = Model.OrderByDescending(b => b.BookId).ToList();
 }
 
-@if(TempData["SuccessMessage"] != null){
-    <div id="myAlert" class="alert alert-success" role="alert">
-    @TempData["SuccessMessage"]
-    </div>
-}
-@if(@TempData["ErrorMessage"] != null) {
-    <div id="myAlert" class="alert alert-danger" role="alert">
-    @TempData["ErrorMessage"]
-    </div>
-}
+
     <!-- Start Slider area -->
     <div class="slider-area brown__nav slider--15 slide__activation slide__arrow01 owl-carousel owl-theme">
         <!-- Start Single Slide -->
@@ -90,7 +82,7 @@
                                 <ul class="add_to_links">
                                 <li><a class="cart" href="#"><i
                                         class="bi bi-shopping-bag4"></i></a></li>
-                                <li><a href="#"><i
+                                <li><a asp-area="User" asp-controller="Cart" asp-action="AddCart" asp-route-BookId="@item.BookId" asp-route-Quantity="1"><i
                                         class="bi bi-shopping-cart-full"></i></a></li>
                                 <li><a data-bs-toggle="modal" title="Quick View"
                                         class="quickview modal-view detail-link"
@@ -153,7 +145,8 @@
                             <div class="product__thumb">
                                 <a class="first__img" href="#"><img
                                         src="@Url.Content("~/uploads/BookImages/" + item.Image)" alt="product image" width="150" height="350"></a>
-                                <a class="second__img animation1" asp-controller="Home" asp-action="Detail" asp-route-BookId="@item.BookId"><img
+                                <a class="second__img animation1" asp-controller="Home" 
+                                        asp-action="Detail" asp-route-BookId="@item.BookId"><img
                                         src="assets/images/books/bookdetail.jpg" alt="product image" width="150" height="350"></a>
                                 <div class="hot__box">
                                 <span class="hot-label">BEST SALER</span>
@@ -170,8 +163,8 @@
                                     <ul class="add_to_links">
                                     <li><a class="cart" href="#"><i
                                             class="bi bi-shopping-bag4"></i></a></li>
-                                    <li><a class="wishlist" href="#"><i
-                                            class="bi bi-shopping-cart-full"></i></a></li>
+                                    <li><a class="wishlist" asp-area="User" asp-controller="Cart" asp-action="AddCart" asp-route-BookId="@item.BookId" asp-route-Quantity="1">
+                                        <i class="bi bi-shopping-cart-full"></i></a></li>
                                     <li><a data-bs-toggle="modal" title="Quick View"
                                             data-bs-target="#productmodal"
                                             class="quickview modal-view detail-link"

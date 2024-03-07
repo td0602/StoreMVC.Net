@@ -1,0 +1,55 @@
+    @{
+
+    }
+    
+    <div class="ht__breadcrumb__area bg-image--1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__inner text-center">
+                        <h2 class="breadcrumb-title text-black">Your Orders</h2>
+                        <nav class="breadcrumb-content">
+                            <a class="breadcrumb_item text-black" href="#">Home</a>
+                            <span class="brd-separator text-black">/</span>
+                            <span class="breadcrumb_item active">Orders</span>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End breadcrumb area -->
+    <!-- cart-main-area start -->
+    <div class="wishlist-area section-padding--lg bg__white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="wishlist-content">
+                        <form action="#">
+                            <div class="wishlist-table wnro__table table-responsive">
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th class="product-name"><span class="nobr">Order Code</span></th>
+                                        <th class="product-price"><span class="nobr"> Total Price </span></th>
+                                        <th class="product-price"><span class="nobr"> Ordering Time </span></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr each="order:${orders}">
+                                        <td></td>
+                                        <td class="product-name"><a href="#" text="${order.orderId}"></a></td>
+                                        <td class="product-price"><span class="amount" text="'$'+${order.orderTotal}"></span></td>
+                                        <td class="product-stock-status"><span text="${order.date}"></span></td>
+                                        <td class="product-add-to-cart"><a class="bg-danger" onclick="return confirm('Bạn chắc chắn hủy đơn hàng?')" href="#"> Cancel</a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

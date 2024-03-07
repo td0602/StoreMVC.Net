@@ -1,0 +1,157 @@
+@{
+
+}
+
+    <div class="ht__breadcrumb__area bg-image--8">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__inner text-center">
+                        <h2 class="breadcrumb-title text-black">Checkout</h2>
+                        <nav class="breadcrumb-content">
+                            <a class="breadcrumb_item text-black" href="#">Home</a>
+                            <span class="brd-separator text-black">/</span>
+                            <span class="breadcrumb_item active">Checkout</span>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End breadcrumb area -->
+    <!-- Start Checkout Area -->
+    <section class="wn__checkout__area section-padding--lg bg__white">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-12">
+                    <div class="customer_details">
+                        <h3>Billing details</h3>
+                        <form id="orderForm" method="post" action="#" object="${order}">
+                            <div class="customar__field">
+                                <input type="hidden" id="orderTotal" name="orderTotal" value="(${order.orderTotal}+70)">
+                                <div class="input_box">
+                                    <label>Full name <span>*</span></label>
+                                    <input type="text" placeholder="Full name" id="fullName" name="fullName" value="${customUserDetails.user.fullName}" required readonly style="background-color: #f0f0f0;">
+                                </div>
+                                <div class="input_box">
+                                    <label>Address <span>*</span></label>
+                                    <input type="text" placeholder="Street address" id="address" name="address" value="${customUserDetails.user.address}" required>
+                                </div>
+                                <div class="input_box">
+                                    <label>Payment<span>*</span></label>
+                                    <select class="select__option" id="payment" name="payment">
+                                        <option if="${order.payment != null}" text="${order.payment}"></option>
+                                        <option>Thanh toán khi nhận hàng (COD - Cash on Delivery)</option>
+                                        <option>Ví điện tử</option>
+                                        <option>Tài khoản ngân hàng</option>
+                                        <option>Thẻ tín dụng/debit</option>
+                                    </select>
+                                </div>
+                                <div class="input_box">
+                                    <label>Note </label>
+                                    <input type="text" placeholder="Note" id="note" name="note" field="${order.note}">
+                                </div>
+                                <div class="margin_between">
+                                    <div class="input_box space_between">
+                                        <label>Phone <span>*</span></label>
+                                        <input type="text" id="phoneNumber" name="phoneNumber" value="${customUserDetails.user.phoneNumber}" required readonly style="background-color: #f0f0f0;">
+                                    </div>
+
+                                    <div class="input_box space_between">
+                                        <label>Email address <span>*</span></label>
+                                        <input type="email" id="email" name="email" value="${customUserDetails.user.email}"  required readonly style="background-color: #f0f0f0;">
+                                    </div>
+                                </div>
+                                <div class="cartbox__btn">
+                                    <ul class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-between">
+                                        <li></li>
+                                        <li if="${order.id == null}"><a id="submitOrderForm">Order</a></li>
+                                        <li if="${order.id != null}"><a class="bg-danger" onclick="return confirm('Bạn chắc chắn hủy đơn hàng?')" href="#">Cancel</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-12 md-mt-40 sm-mt-40">
+                    <div class="wn__order__box">
+                        <h3 class="order__title">Your order</h3>
+                        <ul class="order__total">
+                            <li>Product</li>
+                            <li>Total</li>
+                        </ul>
+                        <ul class="order_product">
+                            <li each="cart:${carts}">
+<!--                                <p text="${cart.bookName}+' × '+${cart.quantity}"></p>-->
+                                <p text="${cart.bookName}+' × '+${cart.quantity}"></p>
+                                <span text="'$'+${cart.total}"></span>
+                            </li>
+                        </ul>
+                        <ul class="shipping__method">
+                            <li>Cart Subtotal <span text="'$'+(${order.orderTotal})"></span></li>
+                            <li>Shipping <span>$70.00</span></li>
+                        </ul>
+                        <ul class="total__amount">
+                            <li>Order Total <span text="'$'+(${order.orderTotal}+70)"></span></li>
+                        </ul>
+                    </div>
+                    <div id="accordion" class="checkout_accordion mt--30" role="tablist">
+                        <div class="payment">
+                            <div class="che__header" role="tab" id="headingOne">
+                                <a class="checkout__title" data-bs-toggle="collapse" href="#collapseOne"
+                                   aria-expanded="true" aria-controls="collapseOne">
+                                    <span>Direct Bank Transfer</span>
+                                </a>
+                            </div>
+                            <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne"
+                                 data-bs-parent="#accordion">
+                                <div class="payment-body">Make your payment directly into our bank account. Please
+                                    use your Order ID as the payment reference. Your order won’t be shipped until
+                                    the funds have cleared in our account.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="payment">
+                            <div class="che__header" role="tab" id="headingTwo">
+                                <a class="collapsed checkout__title" data-bs-toggle="collapse" href="#collapseTwo"
+                                   aria-expanded="false" aria-controls="collapseTwo">
+                                    <span>Cheque Payment</span>
+                                </a>
+                            </div>
+                            <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo"
+                                 data-bs-parent="#accordion">
+                                <div class="payment-body">Please send your cheque to Store Name, Store Street, Store
+                                    Town, Store State / County, Store Postcode.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="payment">
+                            <div class="che__header" role="tab" id="headingThree">
+                                <a class="collapsed checkout__title" data-bs-toggle="collapse" href="#collapseThree"
+                                   aria-expanded="false" aria-controls="collapseThree">
+                                    <span>Cash on Delivery</span>
+                                </a>
+                            </div>
+                            <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree"
+                                 data-bs-parent="#accordion">
+                                <div class="payment-body">Pay with cash upon delivery.</div>
+                            </div>
+                        </div>
+                        <div class="payment">
+                            <div class="che__header" role="tab" id="headingFour">
+                                <a class="collapsed checkout__title" data-bs-toggle="collapse" href="#collapseFour"
+                                   aria-expanded="false" aria-controls="collapseFour">
+                                    <span>PayPal <img src="/assets/images/icons/payment.png" alt="payment images"> </span>
+                                </a>
+                            </div>
+                            <div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour"
+                                 data-bs-parent="#accordion">
+                                <div class="payment-body">Pay with cash upon delivery.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>

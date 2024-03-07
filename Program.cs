@@ -33,7 +33,7 @@ builder.Services.Configure<IdentityOptions>(options => {
     options.Password.RequiredUniqueChars = 0; // Số ký tự riêng biệt
 });
 // đăn ký cấu hình Cookies lưu dữ liệu
-builder.Services.ConfigureApplicationCookie(op => op.LoginPath = "/UserAuthentication/Login");
+builder.Services.ConfigureApplicationCookie(op => op.LoginPath = "/login");
 
 builder.Services.AddScoped<IUserAuthenticationService, UserAuthenticationService>();
 
@@ -55,8 +55,19 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+// Cho những controllers có Areas
+app.MapAreaControllerRoute(
+    name: "FirstAreaControllerRoute",
+    pattern: "/{controller}/{action=Index}/{id?}",
+    areaName: "Test"
+);
+
+// Cho các controllers không có Areas
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+// app.MapControllerRoute(
+//     name: "areas",
+//     pattern: "{area:exists}/{controller}/{action=Index}/{id?}");
 
 app.Run();

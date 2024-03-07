@@ -32,8 +32,8 @@ public class Cart
     [ForeignKey("BookId")]
     public Book book {set; get;}
 
-    public int OrderId {set; get;}
+    public int? OrderId {set; get;}
     [ForeignKey("OrderId")]
-    public Order order {get; set;}
+    public Order? order {get; set;}
 
 }
