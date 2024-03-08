@@ -4,17 +4,6 @@
 <!-- Content Header (Page header) -->
     <section class="content-header">
 
-        @if(TempData["SuccessMessage"] != null){
-            <div id="myAlert" class="alert alert-success" role="alert">
-            @TempData["SuccessMessage"]
-            </div>
-        }
-        @if(@TempData["ErrorMessage"] != null) {
-            <div id="myAlert" class="alert alert-danger" role="alert">
-            @TempData["ErrorMessage"]
-            </div>
-        }
-
       <h1>
         Danh sách sản phẩm
       </h1>
