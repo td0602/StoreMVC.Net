@@ -56,7 +56,7 @@ public class BookController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(Book book, IFormFile? fileImage) {
         if(ModelState.IsValid) {
-            var fileName = await _fileUpload.UploadFileAsync(fileImage);
+            var fileName = await _fileUpload.UploadFileAsync(fileImage, "BookImages");
             book.Image = fileName;
             _dbContext.Books.Add(book);
             await _dbContext.SaveChangesAsync();
@@ -95,7 +95,7 @@ public class BookController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(Book book, IFormFile? fileImage) {
         if(ModelState.IsValid) {
-            book.Image = await _fileUpload.UploadFileAsync(fileImage);
+            book.Image = await _fileUpload.UploadFileAsync(fileImage, "BookImages");
             _dbContext.Books.Update(book);
             await _dbContext.SaveChangesAsync();
             TempData["SuccessMessage"] = "Cập nhật sản phẩm thành công";

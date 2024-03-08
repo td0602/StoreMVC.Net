@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Store_App.Models;
 using Store_App.Models.CustomIdentity;
 using Store_App.Models.DTO;
-using Store_App.Models.ViewModels;
 
 namespace Store_App.Areas.User.Controllers;
 

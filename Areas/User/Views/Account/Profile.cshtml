@@ -1,0 +1,80 @@
+@model Store_App.Models.DTO.EditUserModel;
+<head>
+    <style>
+        .mg-l {
+            margin-left: 250px; /* Đặt giá trị lề trái mong muốn, ví dụ: 20px */
+        }
+    </style>
+</head>
+
+    <div class="ht__breadcrumb__area bg-image--1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__inner text-center">
+                        <h2 class="breadcrumb-title text-black">My Account</h2>
+                        <nav class="breadcrumb-content">
+                            <a class="breadcrumb_item text-black"  href="/home">Home</a>
+                            <span class="brd-separator text-black">/</span>
+                            <span class="breadcrumb_item active">My Account</span>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End breadcrumb area -->
+    <!-- Start My Account Area -->
+    <section class="my_account_area pt--80 pb--55 bg--white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="my__account__wrapper mg-l">
+                        <h3 class="account__title">Account</h3>
+                        <form method="post" asp-area="User" asp-controller="Account"  asp-action="EditProfile" enctype="multipart/form-data">
+                            <div class="account__form">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="input__box">
+                                    <label asp-for="FullName" class="col-sm-2 control-label">Full Name</label>
+                                    <div class="col-sm-10">
+                                        <input asp-for="FullName" type="text" class="form-control" id="fullName" placeholder="Full Name">
+                                    </div>
+                                    <span asp-validation-for="FullName" class="text-danger"></span>
+                                </div>
+                                <div class="input__box">
+                                    <label asp-for="Email" class="col-sm-2 control-label">Email</label>
+                                    <div class="col-sm-10">
+                                        <input asp-for="Email" type="email" class="form-control" id="email" placeholder="Email">
+                                    </div>
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="input__box">
+                                    <label asp-for="Address" class="col-sm-2 control-label">Address</label>
+                                    <div class="col-sm-10">
+                                        <input asp-for="Address" type="text" class="form-control" id="address" placeholder="Address">
+                                    </div>
+                                    <span asp-validation-for="Address" class="text-danger"></span>
+                                </div>
+                                <div class="input__box">
+                                    <label asp-for="PhoneNumber" class="col-sm-2 control-label">Phone Number</label>
+                                    <div class="col-sm-10">
+                                        <input asp-for="PhoneNumber" type="number" class="form-control" id="phonenumber" placeholder="Phone Number">
+                                    </div>
+                                    <sp
+                                <div class="input__box">
+                                    <label asp-for="PasswordConfirm" class="col-sm-2 control-label">Confirm Password</label>
+                                    <div class="col-sm-10">
+                                        <input asp-for="PasswordConfirm" type="password" class="form-control">
+                                    </div>
+                                    <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
+                                </div>
+                                <div class="form__btn">
+                                    <button>Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

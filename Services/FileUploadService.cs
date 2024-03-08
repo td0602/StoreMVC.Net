@@ -9,15 +9,17 @@ public class FileUploadService
         _hostingEnv = hostingEnv;
     }
 
-    public async Task<string> UploadFileAsync(IFormFile file)
+    public async Task<string> UploadFileAsync(IFormFile file, string myPath)
     {
         if (file == null || file.Length == 0)
         {
             return null;
         }
-
-        var uploadsFolder = Path.Combine(_hostingEnv.WebRootPath, "uploads/BookImages");
+        //Tạo Folder uploads
+        var uploadsFolder = Path.Combine(_hostingEnv.WebRootPath, "uploads/"+myPath);
+        // Generic tên file
         var newFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+        // Kết hợp file name và đường dẫn tới thư mucj tạo thành path đến ảnh
         var filePath = Path.Combine(uploadsFolder, newFileName);
         Console.WriteLine(filePath.ToString());
 

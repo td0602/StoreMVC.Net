@@ -1,0 +1,162 @@
+@model Store_App.Models.DTO.EditUserModel
+
+<section class="content">
+
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-3">
+
+                        <div class="box box-primary">
+                            <div class="box-body box-profile">
+                                @if(Model.Image != null) {
+                                    <img class="profile-user-img img-responsive img-circle" src='@Url.Content("/uploads/UserImages/"+@Model.Image)' alt="User profile picture">
+                                }
+                                @if(Model.Image == null) {
+                                    <img class="profile-user-img img-responsive img-circle" src="/admin/assets/images/user2-160x160.jpg" alt="User profile picture">
+                                }
+                                <h3 class="profile-username text-center">@Model.FullName</h3>
+                                <p class="text-muted text-center">Software Engineer</p>
+                                <ul class="list-group list-group-unbordered">
+                                    <li class="list-group-item">
+                                        <b>Followers</b> <a class="pull-right">1,322</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Following</b> <a class="pull-right">543</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Friends</b> <a class="pull-right">13,287</a>
+                                    </li>
+                                </ul>
+                                <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+                            </div>
+
+                        </div>
+
+
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">About Me</h3>
+                            </div>
+
+                            <div class="box-body">
+                                <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
+                                <p class="text-muted">
+                                    Sinh viên năm 5 chuyên ngành Kỹ thuật máy tính viện Kỹ thuật Điện tử - Viễn thông.
+                                    Trường Điện - Điện tử Đại học Bách Khoa Hà Nội.
+                                </p>
+                                <hr>
+                                <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+                                <p class="text-muted">Lục Ngạn, Bắc Giang</p>
+                                <hr>
+                                <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
+                                <p>
+                                    <span class="label label-danger">Java</span>
+                                    <span class="label label-success">Spring Boot</span>
+                                    <span class="label label-info">Thymeleaf</span>
+                                    <span class="label label-warning">MySQL</span>
+                                </p>
+                                <hr>
+                                <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
+                                <p>Đây là sản phẩm của học phần Đồ Án 3.</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-9">
+                        <div class="nav-tabs-custom">
+                            <ul class="nav nav-tabs">
+                                <li class=""><a href="#activity" data-toggle="tab" aria-expanded="false">Activity</a></li>
+                                <li class=""><a href="#timeline" data-toggle="tab" aria-expanded="false">Timeline</a></li>
+                                <li class="active"><a href="#settings" data-toggle="tab" aria-expanded="true">Settings</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane" id="activity">
+                                    <ul class="timeline timeline-inverse">
+
+                                        <li class="time-label">
+                                            <span class="bg-red">
+                                                Chưa triển khai
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+
+                                <div class="tab-pane" id="timeline">
+
+                                    <ul class="timeline timeline-inverse">
+
+                                        <li class="time-label">
+                                            <span class="bg-red">
+                                                Chưa triển khai
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!--Form-->
+                                <div class="tab-pane active" id="settings">
+                                    <form class="form-horizontal" method="post" asp-action="EditProfile" enctype="multipart/form-data">
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                        <div class="form-group">
+                                            <label asp-for="FullName" class="col-sm-2 control-label">Full Name</label>
+                                            <div class="col-sm-10">
+                                                <input asp-for="FullName" type="text" class="form-control" id="fullName" placeholder="Full Name">
+                                            </div>
+                                            <span asp-validation-for="FullName" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="Email" class="col-sm-2 control-label">Email</label>
+                                            <div class="col-sm-10">
+                                                <input asp-for="Email" type="email" class="form-control" id="email" placeholder="Email">
+                                            </div>
+                                            <span asp-validation-for="Email" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="Address" class="col-sm-2 control-label">Address</label>
+                                            <div class="col-sm-10">
+                                                <input asp-for="Address" type="text" class="form-control" id="address" placeholder="Address">
+                                            </div>
+                                            <span asp-validation-for="Address" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="PhoneNumber" class="col-sm-2 control-label">Phone Number</label>
+                                            <div class="col-sm-10">
+                                                <input asp-for="PhoneNumber" type="number" class="form-control" id="phonenumber" placeholder="Phone Number">
+                                            </div>
+                                            <sp
+                                        <div class="form-group">
+                                            <label asp-for="PasswordConfirm" class="col-sm-2 control-label">Confirm Password</label>
+                                            <div class="col-sm-10">
+                                                <input asp-for="PasswordConfirm" type="password" class="form-control">
+                                            </div>
+                                            <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="image" class="col-sm-2 control-label">Image</label>
+                                            <div class="col-sm-10">
+                                                <!--Quan trong: trong Controller se nhan RequestParam co name="fileImage"  -->
+                                                <input type="file" id="" accept="image/*" name="fileImage">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-2 col-sm-10">
+                                                <button href="#" type="submit" class="btn btn-primary pull-right">Submit</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </section>
