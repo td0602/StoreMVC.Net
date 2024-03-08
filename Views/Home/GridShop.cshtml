@@ -88,12 +88,12 @@
                                 
                             @foreach(var item in Model) {
                                 <!-- Start Single Product -->
-                                <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12" each="book:${bookList}">
+                                <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <div class="product__thumb">
                                         <a class="first__img" href="single-product.html"><img
-                                                src="@Url.Content("uploads/BooksImages/" + item.Image)" alt="product image" width="150" height="350"></a>
-                                        <a class="second__img animation1" asp-action="Detail"><img
-                                                src="assets/images/books/bookdetail.jpg" alt="product image"></a>
+                                                src="@Url.Content("~/uploads/BookImages/" + item.Image)" alt="product image" width="150" height="350"></a>
+                                        <a class="second__img animation1" asp-action="Detail" asp-route-BookId="@item.BookId"><img
+                                                src="assets/images/books/bookdetail.jpg" alt="product image" width="150" height="350"></a>
                                         <div class="hot__box">
                                             <span class="hot-label">BEST SALLER</span>
                                         </div>
@@ -107,14 +107,14 @@
                                         <div class="action">
                                             <div class="actions_inner">
                                                 <ul class="add_to_links">
-                                                    <li><a class="cart" href="#"><i
+                                                    <li><a class="cart" asp-area="User" asp-controller="Order" asp-action="AddOrder" asp-route-BookId="@item.BookId"><i
                                                             class="bi bi-shopping-bag4"></i></a></li>
                                                     <li><a class="wishlist" asp-area="User" asp-controller="Cart" asp-action="AddCart" asp-route-BookId="@item.BookId" asp-route-Quantity="1"><i
                                                             class="bi bi-shopping-cart-full"></i></a></li>
                                                     <li><a data-bs-toggle="modal" title="Quick View"
                                                            class="quickview modal-view detail-link"
                                                            data-bs-target="#productmodal"
-                                                           data-id="${book.id}" data-name="${book.bookName}" data-image="${book.image}" data-price="${book.price}" data-category="${book.category.categoryName}"
+                                                           data-id="@item.BookId" data-name="@item.BookName" data-image="@item.Image" data-price="@item.Price" data-category="@item.Category.CategoryName"
                                                             ><i class="bi bi-search"></i></a>
                                                     </li>
                                                 </ul>

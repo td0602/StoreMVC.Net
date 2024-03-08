@@ -13,18 +13,38 @@ public class UserAuthenticationController : Controller
         _service = service;
     }
 
-    public IActionResult Registration() {
+    // public IActionResult Registration() {
+    //     return View();
+    // }
+    // [HttpPost]
+    // public async Task<IActionResult> Registration(RegistrationModel model) {
+    //     if(!ModelState.IsValid) {
+    //         return View(model);
+    //     }
+    //     model.Role = "user";
+    //     var result = await _service.RegisterAsync(model);
+    //     TempData["msg"] = result.Message;
+    //     return RedirectToAction(nameof(Registration));
+    // }
+
+    [Route("/register")]
+    public async Task<IActionResult> Register() {
         return View();
     }
-    [HttpPost]
-    public async Task<IActionResult> Registration(RegistrationModel model) {
+    [HttpPost("/register")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Register(RegistrationModel model) {
         if(!ModelState.IsValid) {
             return View(model);
         }
         model.Role = "user";
         var result = await _service.RegisterAsync(model);
-        TempData["msg"] = result.Message;
-        return RedirectToAction(nameof(Registration));
+        if(result.StatusCode == 0) {
+            TempData["ErrorMessage"] = result.ErrorMessage;
+            return View(model);
+        }
+        TempData["SuccessMessage"] = result.SuccessMessage;
+        return RedirectToAction("Index", "Home");
     }
 
     [Route("/login")]
@@ -45,13 +65,14 @@ public class UserAuthenticationController : Controller
         // var isAdminClaim = User.Claims.Any(c => c.Type == ClaimTypes.Role && c.Value == "admin");
         // 2 cach tren chua kịp cập nhật nên sd dòng dưới
         if(result.StatusCode == 1) {
+            TempData["SuccessMessage"] = result.SuccessMessage;
             if(result.isAdmin){
                 return RedirectToAction("Index", "AdminHome", new {area = "Admin"});
             } else {
                 return RedirectToAction("Index", "Home");
             }
         } else {
-            TempData["msg"] = result.Message;
+            TempData["msg"] = result.ErrorMessage;
             return RedirectToAction(nameof(Login));
         }
     }
@@ -61,16 +82,17 @@ public class UserAuthenticationController : Controller
         await _service.LogoutAsync();
         return RedirectToAction("Index", "Home");
     }
-
+    
+    [Route("/registerAdmin")]
     public async Task<IActionResult> RegisterAdmin() {
         var model = new RegistrationModel {
-            Username = "admin",
-            Name = "Doan",
+            Username = "user2",
+            FullName = "Doan",
             Address = "Bắc Giang",
-            Email = "doan@gmail.com",
-            Password = "admin",
-            Role = "admin",
-            PhoneNumber = "025444848"
+            Email = "user2@gmail.com",
+            Password = "user2",
+            Role = "user",
+            PhoneNumber = "0254448486"
         };
         var result = await _service.RegisterAsync(model);
         return Ok(result);

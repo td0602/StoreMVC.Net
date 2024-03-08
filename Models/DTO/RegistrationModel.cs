@@ -4,22 +4,21 @@ namespace Store_App.Models.DTO;
 
 public class RegistrationModel
 {
-    [Required]
-    public string Name {set; get;}
-    [Required]
+    [Required(ErrorMessage = "Không được để trống!")]
+    public string FullName {set; get;}
+    [Required(ErrorMessage = "Không được để trống!")]
     [EmailAddress]
     public string Email {set; get;}
-    [Required]
+    [Required(ErrorMessage = "Không được để trống!")]
     public string Username {set; get;}
-    [Required]
+    [Required(ErrorMessage = "Không được để trống!")]
     public string Address {set; get;}
-    [Required]
-    [Phone]
+    [Required(ErrorMessage = "Không được để trống!")]
     public string PhoneNumber {set; get;}
-    [Required]
+    [Required(ErrorMessage = "Không được để trống!")]
     public string Password {set; get;}
-    [Required]
-    [Compare("Password")]
+    [Required(ErrorMessage = "Không được để trống!")]
+    [Compare("Password", ErrorMessage = "Mật khẩu nhập lại không khớp!")]
     public string PasswordConfirm {set; get;}
     public string? Role {set; get;}
 }

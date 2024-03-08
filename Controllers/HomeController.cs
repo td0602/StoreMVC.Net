@@ -64,7 +64,7 @@ public class HomeController : Controller
         }
 
         int pageNumber = (page == null || page < 1) ? 1 : page.Value;
-        int pageSize = 4;
+        int pageSize = 6;
         PagedList<Book> lst = new PagedList<Book>(books, pageNumber, pageSize);
         return View(lst);
     }

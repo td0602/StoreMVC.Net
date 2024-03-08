@@ -230,7 +230,7 @@
             </li>
           </ul>
           <li>
-                <a>
+                <a href="/admin/list-orders">
                     <i class="fa fa-cube"></i> <span>Quản lý Đơn hàng </span>
                 </a>
             </li>
@@ -250,6 +250,18 @@
 
       <!-- Default box -->
       <div class="box">
+
+            @if(TempData["SuccessMessage"] != null){
+                <div id="myAlert" class="alert alert-success text-center" role="alert">
+                @TempData["SuccessMessage"]
+                </div>
+            }
+            @if(@TempData["ErrorMessage"] != null) {
+                <div id="myAlert" class="alert alert-danger text-center" role="alert">
+                @TempData["ErrorMessage"]
+                </div>
+            }
+
         
         @RenderBody()
       </div>

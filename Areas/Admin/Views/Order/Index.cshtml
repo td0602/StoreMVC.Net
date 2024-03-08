@@ -1,0 +1,75 @@
+
+
+
+@using X.PagedList.Mvc.Core
+@model X.PagedList.IPagedList<Order>
+
+<!-- Content Wrapper. Contains page content -->
+    @* <div class="content-wrapper"> *@
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Danh sách đơn hàng
+            </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <!-- Default box -->
+            <div class="box">
+                <div class="box-body">
+
+                    <form action="" method="get">
+                        <div class="box-tools pull-right margin-bottom">
+                            <div class="input-group input-group-sm hidden-xs" style="width: 200px;">
+                                <input type="text" name="searchString" class="form-control pull-right" placeholder="Search" value="@ViewBag.currentFilter">
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <table class="table table-bordered">
+                        <tbody><tr>
+                            <th>Customer's Name</th>
+                            <th>Order Code</th>
+                            <th>Note</th>
+                            <th>Total Price</th>
+                            <th>Address</th>
+                            <th>Ordering Time</th>
+                            <th>Action</th>
+                        </tr>
+                        @foreach(var item in Model) {
+                            <tr>
+                            <td>@item.FullName</td>
+                            <td><a href="/admin/order-detail?OrderId=@item.OrderId">@item.OrderCode</a></td>
+                            <td>@item.Note</td>
+                            <td>@item.OrderTotal</td>
+                            <td>@item.Address</td>
+                            <td>@item.DateCreated</td>
+                            <td>
+                                <a class="btn btn-danger" onclick="return confirm('Bạn chắc chắn?')" href="/admin/delete-order?OrderId=@item.OrderId">Delete</a>
+                            </td>
+                        </tr>
+                        }
+
+                        </tbody></table>
+
+                </div>
+
+                @Html.PagedListPager(Model, page => Url.Action("Index", 
+                new {currentFilter = ViewBag.currentFilter, page}), 
+                new X.PagedList.Web.Common.PagedListRenderOptions(){
+                    LiElementClasses = new List<String> {"page-item"},
+                    PageClasses = new List<String> {"page-link"}
+                    })
+
+            </div>
+            <!-- /.box -->
+
+        </section>
+        <!-- /.content -->
+    @* </div> *@
+    <!-- /.content-wrapper -->

@@ -28,6 +28,7 @@ public class CartController : Controller
 
     [Route("/add-cart")]
     public async Task<IActionResult> AddCart(int BookId, int Quantity) {
+        Console.WriteLine("=======================================BOOKID = " + BookId);
         var book = await _dbContext.Books.FindAsync(BookId);
         var cartCheck = await _dbContext.Carts.Where(c => c.BookId == BookId && c.AppUserId == Convert.ToInt32(_userManager.GetUserId(User)) && c.Status == true).FirstOrDefaultAsync();
         if(book == null) {
@@ -61,7 +62,6 @@ public class CartController : Controller
     [HttpPost("/update-cart")]
     // [Route("/update-cart")]
     public async Task UpdateCart(int CartId, int NewQuantity) {
-        Console.WriteLine($"===========================================CartId= {CartId} NewQuantity= {NewQuantity}");
         var cart = await _dbContext.Carts.FindAsync(CartId);
         if(cart == null) {
             TempData["ErrorMessage"] = "Không thể cập nhật giỏ hàng";

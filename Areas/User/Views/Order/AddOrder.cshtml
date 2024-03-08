@@ -2,7 +2,7 @@
 
 }
 
-@model Store_App.Models.ViewModels.OrderViewModel
+@model Store_App.Models.DTO.OrderModel
 
     <div class="ht__breadcrumb__area bg-image--8">
         <div class="container">
@@ -28,44 +28,46 @@
                 <div class="col-lg-6 col-12">
                     <div class="customer_details">
                         <h3>Billing details</h3>
-                        <form id="orderForm" method="post" asp-action="AddOrder">
+                        <form id="orderForm" method="post" asp-action="AddOrder" asp-route-BookId="@ViewBag.BookId">
                             <div class="customar__field">
                                 @* <input type="hidden" id="orderTotal" name="orderTotal" value=""> *@
+                                @* <div asp-validation-summary="ModelOnly" class="text-danger"></div> *@
+                                <input type="hidden" asp-for="Carts">
                                 <div class="input_box">
-                                    <label asp-for="OrderView.FullName">Full Name<span>*</span></label>
-                                    <input asp-for="OrderView.FullName" type="text" value="@Model.User.Name" readonly style="background-color: #f0f0f0;">
-                                    <span asp-validation-for="OrderView.FullName"></span>
+                                    <label asp-for="FullName">Full Name<span>*</span></label>
+                                    <input asp-for="FullName" type="text" readonly style="background-color: #f0f0f0;">
+                                    <span asp-validation-for="FullName"></span>
                                 </div>
                                 <div class="input_box">
-                                    <label asp-for="OrderView.Address">Address <span>*</span></label>
-                                    <input asp-for="OrderView.Address" type="text" value="@Model.User.Address" required readonly style="background-color: #f0f0f0;">
-                                    <span asp-validation-for="OrderView.Address"></span>
+                                    <label asp-for="Address">Address <span>*</span></label>
+                                    <input asp-for="Address" type="text" required>
+                                    <span asp-validation-for="Address" class="text-danger"></span>
                                 </div>
                                 <div class="input_box">
-                                    <label asp-for="OrderView.PayMent">Payment<span>*</span></label>
-                                    <select class="select__option" id="payment" asp-for="OrderView.PayMent">
+                                    <label asp-for="Payment">Payment<span>*</span></label>
+                                    <select class="select__option" id="payment" asp-for="Payment">
                                         @* <option if="${order.payment != null}" text="${order.payment}"></option> *@
                                         <option>Thanh toán khi nhận hàng (COD - Cash on Delivery)</option>
                                         <option>Ví điện tử</option>
                                         <option>Tài khoản ngân hàng</option>
                                         <option>Thẻ tín dụng/debit</option>
                                     </select>
-                                    <span asp-validation-for="OrderView.PayMent"></span>
+                                    <span asp-validation-for="Payment"></span>
                                 </div>
                                 <div class="input_box">
-                                    <label asp-for="OrderView.Note">Note </label>
-                                    <input asp-for="OrderView.Note" type="text">
-                                    <span asp-validation-for="OrderView.Note"></span>
+                                    <label asp-for="Note">Note </label>
+                                    <input asp-for="Note" type="text">
+                                    <span asp-validation-for="Note"></span>
                                 </div>
                                 <div class="margin_between">
                                     <div class="input_box space_between">
-                                        <label asp-for="OrderView.PhoneNumber">Phone <span>*</span></label>
-                                        <input asp-for="OrderView.PhoneNumber" type="text" value="@Model.User.PhoneNumber" required readonly style="background-color: #f0f0f0;">
+                                        <label asp-for="PhoneNumber">Phone <span>*</span></label>
+                                        <input asp-for="PhoneNumber" type="text" required readonly style="background-color: #f0f0f0;">
                                     </div>
 
                                     <div class="input_box space_between">
-                                        <label asp-for="OrderView.Email">Email <span>*</span></label>
-                                        <input asp-for="OrderView.Email" type="email"value="@Model.User.Email"  required readonly style="background-color: #f0f0f0;">
+                                        <label asp-for="Email">Email <span>*</span></label>
+                                        <input asp-for="Email" type="email" required readonly style="background-color: #f0f0f0;">
                                     </div>
                                 </div>
                                 <div class="cartbox__btn">

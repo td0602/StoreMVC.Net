@@ -2,9 +2,11 @@ using Store_App.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using X.PagedList;
+using Microsoft.AspNetCore.Authorization;
 
 namespace StoreApp.Areas.Admin.Controllers;
 [Area("Admin")]
+[Authorize(Roles = "admin")]
 [Route("admin/category")]
 public class CategoryController : Controller
 {

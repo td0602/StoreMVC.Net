@@ -24,12 +24,12 @@ public class UserAuthenticationService : IUserAuthenticationService
         var user = await userManager.FindByNameAsync(model.Username);
         if(user == null) {
             status.StatusCode = 0;
-            status.Message = "Tên đăng nhập không đúng";
+            status.ErrorMessage = "Tên đăng nhập không đúng";
             return status;
         }
         if(!await userManager.CheckPasswordAsync(user, model.Password)) {
             status.StatusCode = 0;
-            status.Message = "Mật khẩu không đúng";
+            status.ErrorMessage = "Mật khẩu không đúng";
             return status;
         }
         // xác thực người dùng đăng nhập đúng hay không?
@@ -50,15 +50,15 @@ public class UserAuthenticationService : IUserAuthenticationService
             }
             
             status.StatusCode = 1;
-            status.Message = "Đăng nhập thành công";
+            status.SuccessMessage = "Đăng nhập thành công";
             return status;
         } else if (signInResult.IsLockedOut) {
             status.StatusCode = 0;
-            status.Message = "Tài khoản của bạn đã bị khóa";
+            status.ErrorMessage = "Tài khoản của bạn đã bị khóa";
             return status;
         } else {
             status.StatusCode = 0;
-            status.Message = "Lỗi đăng nhập";
+            status.ErrorMessage = "Lỗi đăng nhập";
             return status;
         }   
     }
@@ -74,13 +74,13 @@ public class UserAuthenticationService : IUserAuthenticationService
         var userExists = await userManager.FindByNameAsync(model.Username);
         if(userExists != null) {
             status.StatusCode = 0;
-            status.Message = "Người dùng đã tồn tại";
+            status.ErrorMessage = "Người dùng đã tồn tại";
             return status;
         }
 
         AppUser user = new AppUser {
             SecurityStamp = Guid.NewGuid().ToString(),
-            Name = model.Name,
+            Name = model.FullName,
             Email=model.Email,
             Address = model.Address,
             UserName=model.Username,
@@ -97,7 +97,7 @@ public class UserAuthenticationService : IUserAuthenticationService
             }
 
             status.StatusCode = 0;
-            status.Message = "Tạo tài khoản thất bại";
+            status.ErrorMessage = "Tạo tài khoản thất bại";
             return status;
         }
 
@@ -110,7 +110,7 @@ public class UserAuthenticationService : IUserAuthenticationService
         }
 
         status.StatusCode = 1;
-        status.Message = "Tạo tài khoản thành công";
+        status.SuccessMessage = "Tạo tài khoản thành công";
         return status;
     }
 }

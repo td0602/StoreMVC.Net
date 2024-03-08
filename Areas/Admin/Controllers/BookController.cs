@@ -1,4 +1,5 @@
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using X.PagedList;
 namespace Store_App.Areas.Admin.Controllers;
 
 [Area("Admin")]
+[Authorize(Roles = "admin")]
 [Route("admin/book")]
 public class BookController : Controller
 {
