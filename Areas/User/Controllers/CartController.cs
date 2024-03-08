@@ -21,7 +21,7 @@ public class CartController : Controller
 
     [Route("/list-carts")]
     public async Task<IActionResult> Index() {
-        var carts = await _dbContext.Carts.ToListAsync();
+        var carts = await _dbContext.Carts.Where(c => c.AppUserId == Convert.ToInt32(_userManager.GetUserId(User)) && c.Status == true).ToListAsync();
 
         return View(carts);
     }
@@ -29,10 +29,11 @@ public class CartController : Controller
     [Route("/add-cart")]
     public async Task<IActionResult> AddCart(int BookId, int Quantity) {
         var book = await _dbContext.Books.FindAsync(BookId);
-        var cartCheck = await _dbContext.Carts.Where(c => c.BookId == BookId && c.AppUserId == Convert.ToInt32(_userManager.GetUserId(User))).FirstOrDefaultAsync();
+        var cartCheck = await _dbContext.Carts.Where(c => c.BookId == BookId && c.AppUserId == Convert.ToInt32(_userManager.GetUserId(User)) && c.Status == true).FirstOrDefaultAsync();
         if(book == null) {
             TempData["ErrorMessage"] = "Không thể thêm sản phẩm vào giỏ hàng";
-        } else if(cartCheck == null) {
+        } else {
+            if(cartCheck == null) {
             var cart = new Cart {
                 BookName = book.BookName,
                 Quantity = Quantity,
@@ -53,7 +54,8 @@ public class CartController : Controller
             await _dbContext.SaveChangesAsync();
             TempData["SuccessMessage"] = "Thêm sản phẩm vào giỏ hàng thành công";
         }
-        return RedirectToAction("Index", "Home");
+        }
+        return RedirectToAction("GridShop", "Home");
     }
 
     [HttpPost("/update-cart")]

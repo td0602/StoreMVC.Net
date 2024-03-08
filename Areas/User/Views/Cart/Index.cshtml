@@ -82,7 +82,9 @@
                     <div class="cartbox__btn">
                         <ul class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-between">
                             <li></li>
-                            <li><a id="submitCartForm" href="#">Order</a></li>
+                            @if(!(Model.Count == 0)) {
+                                <li><a id="submitCartForm" href="/add-order">Order</a></li>
+                            }
                         </ul>
                     </div>
                 </div>

@@ -2,6 +2,8 @@
 
 }
 
+@model Store_App.Models.Order
+
     <div class="ht__breadcrumb__area bg-image--8">
         <div class="container">
             <div class="row">
@@ -26,21 +28,21 @@
                 <div class="col-lg-6 col-12">
                     <div class="customer_details">
                         <h3>Billing details</h3>
-                        <form id="orderForm" method="post" action="#" object="${order}">
+                        <form id="orderForm" method="post" asp-action="AddOrder">
                             <div class="customar__field">
-                                <input type="hidden" id="orderTotal" name="orderTotal" value="(${order.orderTotal}+70)">
+                                @* <input type="hidden" id="orderTotal" name="orderTotal" value=""> *@
                                 <div class="input_box">
-                                    <label>Full name <span>*</span></label>
-                                    <input type="text" placeholder="Full name" id="fullName" name="fullName" value="${customUserDetails.user.fullName}" required readonly style="background-color: #f0f0f0;">
+                                    <label asp-for="FullName">Full Name<span>*</span></label>
+                                    <input asp-for="FullName" type="text" required readonly style="background-color: #f0f0f0;">
                                 </div>
                                 <div class="input_box">
-                                    <label>Address <span>*</span></label>
-                                    <input type="text" placeholder="Street address" id="address" name="address" value="${customUserDetails.user.address}" required>
+                                    <label asp-for="Address">Address <span>*</span></label>
+                                    <input asp-for="Address" type="text" required readonly style="background-color: #f0f0f0;">
                                 </div>
                                 <div class="input_box">
-                                    <label>Payment<span>*</span></label>
-                                    <select class="select__option" id="payment" name="payment">
-                                        <option if="${order.payment != null}" text="${order.payment}"></option>
+                                    <label asp-for="Payment">Payment<span>*</span></label>
+                                    <select class="select__option" id="payment" asp-for="Payment">
+                                        @* <option if="${order.payment != null}" text="${order.payment}"></option> *@
                                         <option>Thanh toán khi nhận hàng (COD - Cash on Delivery)</option>
                                         <option>Ví điện tử</option>
                                         <option>Tài khoản ngân hàng</option>
@@ -48,25 +50,25 @@
                                     </select>
                                 </div>
                                 <div class="input_box">
-                                    <label>Note </label>
-                                    <input type="text" placeholder="Note" id="note" name="note" field="${order.note}">
+                                    <label asp-for="Note">Note </label>
+                                    <input asp-for="Note" type="text">
                                 </div>
                                 <div class="margin_between">
                                     <div class="input_box space_between">
-                                        <label>Phone <span>*</span></label>
-                                        <input type="text" id="phoneNumber" name="phoneNumber" value="${customUserDetails.user.phoneNumber}" required readonly style="background-color: #f0f0f0;">
+                                        <label asp-for="PhoneNumber">Phone <span>*</span></label>
+                                        <input asp-for="PhoneNumber" type="text" required readonly style="background-color: #f0f0f0;">
                                     </div>
 
                                     <div class="input_box space_between">
-                                        <label>Email address <span>*</span></label>
-                                        <input type="email" id="email" name="email" value="${customUserDetails.user.email}"  required readonly style="background-color: #f0f0f0;">
+                                        <label asp-for="Email">Email <span>*</span></label>
+                                        <input asp-for="Email" type="email"  required readonly style="background-color: #f0f0f0;">
                                     </div>
                                 </div>
                                 <div class="cartbox__btn">
                                     <ul class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-between">
                                         <li></li>
-                                        <li if="${order.id == null}"><a id="submitOrderForm">Order</a></li>
-                                        <li if="${order.id != null}"><a class="bg-danger" onclick="return confirm('Bạn chắc chắn hủy đơn hàng?')" href="#">Cancel</a></li>
+                                        <li><a class="bg-danger" onclick="return confirm('Bạn chắc chắn hủy đơn hàng?')" 
+                                            asp-action="CancelOrder" asp-route-OrderId="@Model.OrderId">Cancel</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -81,18 +83,19 @@
                             <li>Total</li>
                         </ul>
                         <ul class="order_product">
-                            <li each="cart:${carts}">
-<!--                                <p text="${cart.bookName}+' × '+${cart.quantity}"></p>-->
-                                <p text="${cart.bookName}+' × '+${cart.quantity}"></p>
-                                <span text="'$'+${cart.total}"></span>
+                            @foreach(var item in Model.carts) {
+                                <li>
+                                <p>@item.BookName × @item.Quantity</p>
+                                <span>$@item.Total</span>
                             </li>
+                            }
                         </ul>
                         <ul class="shipping__method">
-                            <li>Cart Subtotal <span text="'$'+(${order.orderTotal})"></span></li>
-                            <li>Shipping <span>$70.00</span></li>
+                            <li>Cart Subtotal <span>$@Model.carts.Sum(c => c.Total)</span></li>
+                            <li>Shipping <span>$0.00</span></li>
                         </ul>
                         <ul class="total__amount">
-                            <li>Order Total <span text="'$'+(${order.orderTotal}+70)"></span></li>
+                            <li>Order Total <span>$@(Model.carts.Sum(c => c.Total)+50)</span></li>
                         </ul>
                     </div>
                     <div id="accordion" class="checkout_accordion mt--30" role="tablist">
@@ -155,3 +158,13 @@
             </div>
         </div>
     </section>
+
+    <script>
+    document.getElementById("submitOrderForm").addEventListener("click", function() {
+        // Lấy ra biểu mẫu theo ID
+        var form = document.getElementById("orderForm");
+
+        // Submit biểu mẫu
+        form.submit();
+    });
+</script>

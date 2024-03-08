@@ -4,17 +4,6 @@
 @{
     Layout = "~/Views/Shared/_LayoutBookStore.cshtml";
 }
-   
-   @if(TempData["SuccessMessage"] != null){
-    <div id="myAlert" class="alert alert-success" role="alert">
-    @TempData["SuccessMessage"]
-    </div>
-}
-@if(@TempData["ErrorMessage"] != null) {
-    <div id="myAlert" class="alert alert-danger" role="alert">
-    @TempData["ErrorMessage"]
-    </div>
-}
 
     <div class="ht__breadcrumb__area bg-image--1">
         <div class="container">
@@ -120,7 +109,7 @@
                                                 <ul class="add_to_links">
                                                     <li><a class="cart" href="#"><i
                                                             class="bi bi-shopping-bag4"></i></a></li>
-                                                    <li><a class="wishlist" href="#"><i
+                                                    <li><a class="wishlist" asp-area="User" asp-controller="Cart" asp-action="AddCart" asp-route-BookId="@item.BookId" asp-route-Quantity="1"><i
                                                             class="bi bi-shopping-cart-full"></i></a></li>
                                                     <li><a data-bs-toggle="modal" title="Quick View"
                                                            class="quickview modal-view detail-link"

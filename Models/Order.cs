@@ -13,7 +13,7 @@ public class Order
     [Display(Name ="Mã đơn hàng")]
     public string OrderCode {set; get;}
     [Display(Name ="Khách hàng")]
-    public string UserName {set; get;}
+    public string FullName {set; get;}
     [Display(Name ="Địa chỉ")]
     public string Address {set; get;}
     [Display(Name ="Số điện thoại")]
@@ -26,7 +26,7 @@ public class Order
     [Display(Name ="Phương thức thanh toán")]
     public string Payment  {set; get;}
     [Display(Name ="Ghi chú")]
-    public string Note {set; get;}
+    public string? Note {set; get;}
     [Display(Name ="Ngày tạo")]
     public DateTime DateCreated {set; get;}
 

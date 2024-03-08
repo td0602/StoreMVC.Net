@@ -69,7 +69,8 @@ public class UserAuthenticationController : Controller
             Address = "Bắc Giang",
             Email = "doan@gmail.com",
             Password = "admin",
-            Role = "admin"
+            Role = "admin",
+            PhoneNumber = "025444848"
         };
         var result = await _service.RegisterAsync(model);
         return Ok(result);

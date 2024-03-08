@@ -1,7 +1,8 @@
     @{
 
     }
-    
+    @model List<Store_App.Models.Order>
+
     <div class="ht__breadcrumb__area bg-image--1">
         <div class="container">
             <div class="row">
@@ -37,13 +38,16 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr each="order:${orders}">
+                                    @foreach(var item in Model) {
+                                        <tr>
                                         <td></td>
-                                        <td class="product-name"><a href="#" text="${order.orderId}"></a></td>
-                                        <td class="product-price"><span class="amount" text="'$'+${order.orderTotal}"></span></td>
-                                        <td class="product-stock-status"><span text="${order.date}"></span></td>
-                                        <td class="product-add-to-cart"><a class="bg-danger" onclick="return confirm('Bạn chắc chắn hủy đơn hàng?')" href="#"> Cancel</a></td>
+                                        <td class="product-name"><a asp-area="User" asp-controller="Order" asp-action="OrderDetail" asp-route-OrderId="@item.OrderId">@item.OrderCode</a></td>
+                                        <td class="product-price"><span class="amount">$@item.OrderTotal</span></td>
+                                        <td class="product-stock-status"><span>@item.DateCreated</span></td>
+                                        <td class="product-add-to-cart"><a class="bg-danger" onclick="return confirm('Bạn chắc chắn hủy đơn hàng?')" 
+                                            asp-action="CancelOrder" asp-route-OrderId="@item.OrderId"> Cancel</a></td>
                                     </tr>
+                                    }
                                     </tbody>
                                 </table>
                             </div>

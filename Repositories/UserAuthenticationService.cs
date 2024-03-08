@@ -84,6 +84,7 @@ public class UserAuthenticationService : IUserAuthenticationService
             Email=model.Email,
             Address = model.Address,
             UserName=model.Username,
+            PhoneNumber = model.PhoneNumber,
             EmailConfirmed = true,
             PhoneNumberConfirmed = true
         };

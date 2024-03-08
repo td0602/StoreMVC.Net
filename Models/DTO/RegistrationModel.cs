@@ -14,6 +14,9 @@ public class RegistrationModel
     [Required]
     public string Address {set; get;}
     [Required]
+    [Phone]
+    public string PhoneNumber {set; get;}
+    [Required]
     public string Password {set; get;}
     [Required]
     [Compare("Password")]
